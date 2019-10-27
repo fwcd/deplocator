@@ -6,7 +6,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     entry_points={
         'console_scripts': [
-            'deplocator=deplocator:main'
+            'deplocator=deplocator.__main__:main'
         ]
     }
 )
