@@ -21,18 +21,16 @@ def main():
 
     found = set()
     for pkg in pkgs:
-        deps = find_maven_dependency(pkg)
-        if len(deps) > 0:
-            dep = deps[0].split(":")
-            if len(dep) == 3:
-                [group_id, artifact_id, version] = dep
-                group_artifact = (group_id, artifact_id)
-                if group_artifact not in found:
-                    found.add(group_artifact)
-                    if args.maven:
-                        print(format_maven(group_id, artifact_id, version))
-                    elif args.gradle:
-                        print(format_gradle(group_id, artifact_id, version))
-                    else:
-                        print(pkg, "->", format_simple(group_id, artifact_id, version))
+        dep = find_maven_dependency(pkg)
+        if dep:
+            [group_id, artifact_id, version] = dep
+            group_artifact = (group_id, artifact_id)
+            if group_artifact not in found:
+                found.add(group_artifact)
+                if args.maven:
+                    print(format_maven(group_id, artifact_id, version))
+                elif args.gradle:
+                    print(format_gradle(group_id, artifact_id, version))
+                else:
+                    print(pkg, "->", format_simple(group_id, artifact_id, version))
 
